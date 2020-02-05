@@ -1,0 +1,38 @@
+name: MacOS puppet apply
+on: [push]
+jobs:
+  pdk:
+    name: Puppet install and apply
+    runs-on: macos-10.15
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v1
+    - name: Install puppet
+      run: |
+        set -euo pipefail
+        PUPPET_AGENT_BASENAME='puppet-agent-6.11.1-1'
+        PUPPET_MACOS_MAJOR_VERSION='10.14'
+        PUPPET_DMG_URL="https://downloads.puppet.com/mac/puppet6/${PUPPET_MACOS_MAJOR_VERSION}/x86_64/${PUPPET_AGENT_BASENAME}.osx${PUPPET_MACOS_MAJOR_VERSION}.dmg"
+        WORK_DIR=$(mktemp -d)
+
+        echo "Downloading ${PUPPET_AGENT_BASENAME} from downloads.puppetlabs.com..."
+        curl -o "${WORK_DIR}/puppet-agent.dmg" "${PUPPET_DMG_URL}"
+
+        echo "Mounting DMG and installing puppet-agent..."
+        hdiutil attach "${WORK_DIR}/puppet-agent.dmg"
+        sudo installer -package "/Volumes/${PUPPET_AGENT_BASENAME}.osx${PUPPET_MACOS_MAJOR_VERSION}/${PUPPET_AGENT_BASENAME}-installer.pkg" -target /
+        hdiutil detach "/Volumes/${PUPPET_AGENT_BASENAME}.osx${PUPPET_MACOS_MAJOR_VERSION}"
+
+    - name: Puppet module install & apply
+      run: |
+        set -euo pipefail
+        echo "Creating tarball of /etc/puppetlabs/code/modules/buildkite_agent..."
+        tar -czvf ../module.tar.gz .
+        echo "Installing puppet-buildkite_agent and dependencies..."
+        sudo /opt/puppetlabs/puppet/bin/puppet module install ../module.tar.gz
+
+        echo "Running puppet apply (1 of 2)..."
+        sudo /opt/puppetlabs/puppet/bin/puppet apply -e "include buildkite_agent"
+
+        echo "Running puppet apply (2 of 2)..."
+        sudo /opt/puppetlabs/puppet/bin/puppet apply -e "include buildkite_agent"
