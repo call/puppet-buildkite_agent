@@ -28,7 +28,7 @@ class buildkite_agent::install (
       source       => $package_source,
       extract      => true,
       extract_path => "/tmp/${archive_name}-untar",
-      cleanup      => false
+      cleanup      => false,
     }
 
     exec { 'cp_buildkite_agent':
