@@ -26,7 +26,7 @@ jobs:
     - name: Puppet module install & apply
       run: |
         set -euo pipefail
-        echo "Creating tarball of /etc/puppetlabs/code/modules/buildkite_agent..."
+        echo "Creating tarball of puppet-buildkite_agent..."
         tar -czvf ../module.tar.gz .
         echo "Installing puppet-buildkite_agent and dependencies..."
         sudo /opt/puppetlabs/puppet/bin/puppet module install ../module.tar.gz
