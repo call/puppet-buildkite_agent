@@ -1,13 +1,18 @@
 {
-  "name": "call-buildkite_agent",
-  "version": "0.1.0",
   "author": "call",
-  "summary": "",
-  "license": "MIT",
-  "source": "",
   "dependencies": [
-
+    {
+      "name": "puppet/archive",
+      "version_requirement": ">= 4.4.0 < 5.0.0"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 6.2.0 < 7.0.0"
+    }
   ],
+  "issues_url": "https://github.com/call/puppet-buildkite_agent/issues",
+  "license": "MIT",
+  "name": "call-buildkite_agent",
   "operatingsystem_support": [
     {
       "operatingsystem": "Darwin",
@@ -16,13 +21,17 @@
       ]
     }
   ],
+  "pdk-version": "1.15.0",
+  "project_page": "https://github.com/call/puppet-buildkite_agent",
   "requirements": [
     {
       "name": "puppet",
       "version_requirement": ">= 4.10.0 < 7.0.0"
     }
   ],
-  "pdk-version": "1.15.0",
+  "source": "https://github.com/call/puppet-buildkite_agent",
+  "summary": "A puppet module for managing Buildkite agents.",
+  "template-ref": "tags/1.15.0-0-g0bc522e",
   "template-url": "pdk-default#1.15.0",
-  "template-ref": "tags/1.15.0-0-g0bc522e"
+  "version": "0.1.0"
 }
