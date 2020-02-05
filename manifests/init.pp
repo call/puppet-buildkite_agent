@@ -5,4 +5,6 @@
 # @example
 #   include buildkite_agent
 class buildkite_agent {
+  include archive
+  include buildkite_agent::install
 }
