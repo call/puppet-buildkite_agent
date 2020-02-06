@@ -19,7 +19,7 @@ class buildkite_agent::install (
   } else {
     notify{ "Buildkite-agent ${package_ensure} not installed, installing...": }
 
-    file {"/tmp/${archive_name}-untar":
+    file { "/tmp/${archive_name}-untar":
       ensure => directory,
     }
 
