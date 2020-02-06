@@ -122,9 +122,6 @@ define buildkite_agent::config (
         line => $line,
       }
     }
-
   }
 
 }
-
-
