@@ -7,3 +7,4 @@ buildkite_agent::configs:
     bk_name: 'foofoobar'
     tags: 'queue=foobarbar'
     debug: true
+    priority: 1

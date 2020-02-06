@@ -8,58 +8,50 @@ define buildkite_agent::config (
   String[1] $config_file_path = '/usr/local/etc/buildkite-agent/buildkite-agent.cfg',
   Optional[String] $bootstrap_script = undef,
   Optional[String] $build_path = undef,
-  Optional[String] $cancel_grace_period = undef,
+  Optional[Boolean] $cancel_grace_period = undef,
   Optional[String] $cancel_signal = undef,
   Optional[Boolean] $debug = undef,
   Optional[Boolean] $debug_http = undef,
   Optional[Boolean] $disconnect_after_job = undef,
-  Optional[String] $disconnect_after_idle_timeout = undef,
+  Optional[Integer] $disconnect_after_idle_timeout = undef,
   Optional[String] $endpoint = undef,
   Optional[String] $experiment = undef,
   Optional[String] $git_clean_flags = undef,
   Optional[String] $git_clone_flags = undef,
   Optional[String] $git_clone_mirror_flags = undef,
   Optional[String] $git_fetch_flags = undef,
-  Optional[String] $git_mirrors_lock_timeout = undef,
+  Optional[Integer] $git_mirrors_lock_timeout = undef,
   Optional[String] $git_mirrors_path = undef,
   Optional[String] $health_check_addr = undef,
   Optional[String] $hooks_path = undef,
   Optional[String] $log_format = undef,
-  Optional[String] $metrics_datadog = undef,
+  Optional[Boolean] $metrics_datadog = undef,
   Optional[String] $metrics_datadog_host = undef,
   Optional[String] $bk_name = undef, # Has 'bk_' prefix to avoid name collision
-  Optional[String] $no_color = undef,
-  Optional[String] $no_command_eval = undef,
-  Optional[String] $no_git_submodules = undef,
-  Optional[String] $no_http2 = undef,
-  Optional[String] $no_local_hooks = undef,
-  Optional[String] $no_plugins = undef,
-  Optional[String] $no_plugin_validation = undef,
-  Optional[String] $no_pty = undef,
-  Optional[String] $no_ssh_keyscan = undef,
+  Optional[Boolean] $no_color = undef,
+  Optional[Boolean] $no_command_eval = undef,
+  Optional[Boolean] $no_git_submodules = undef,
+  Optional[Boolean] $no_http2 = undef,
+  Optional[Boolean] $no_local_hooks = undef,
+  Optional[Boolean] $no_plugins = undef,
+  Optional[Boolean] $no_plugin_validation = undef,
+  Optional[Boolean] $no_pty = undef,
+  Optional[Boolean] $no_ssh_keyscan = undef,
   Optional[String] $plugins_path = undef,
-  Optional[String] $priority = undef,
+  Optional[Integer] $priority = undef,
   Optional[String] $shell = undef,
   Optional[String] $spawn = undef,
   Optional[String] $tags = undef,
-  Optional[String] $tags_from_ec2 = undef,
-  Optional[String] $tags_from_ec2_tags = undef,
-  Optional[String] $tags_from_gcp = undef,
-  Optional[String] $tags_from_gcp_labels = undef,
-  Optional[String] $tags_from_host = undef,
-  Optional[String] $timestamp_lines = undef,
+  Optional[Boolean] $tags_from_ec2 = undef,
+  Optional[Boolean] $tags_from_ec2_tags = undef,
+  Optional[Boolean] $tags_from_gcp = undef,
+  Optional[Boolean] $tags_from_gcp_labels = undef,
+  Optional[Boolean] $tags_from_host = undef,
+  Optional[Boolean] $timestamp_lines = undef,
   Optional[String] $token = undef,
   Optional[String] $wait_for_ec2_tags_timeout = undef,
   Optional[String] $wait_for_gcp_labels_timeout = undef,
 ) {
-
-  file { dirname($config_file_path):
-    ensure => directory,
-  }
-
-  file { $config_file_path:
-    ensure => file,
-  }
 
   $settings = {
     'bootstrap-script'              => $bootstrap_script,
@@ -107,6 +99,14 @@ define buildkite_agent::config (
     'token'                         => $token,
     'wait-for-ec2-tags-timeout'     => $wait_for_ec2_tags_timeout,
     'wait-for-gcp-labels-timeout'   => $wait_for_gcp_labels_timeout,
+  }
+
+  file { dirname($config_file_path):
+    ensure => directory,
+  }
+
+  file { $config_file_path:
+    ensure => file,
   }
 
   $settings.each |String $key, Optional[Variant[String, Integer, Boolean]] $val| {
