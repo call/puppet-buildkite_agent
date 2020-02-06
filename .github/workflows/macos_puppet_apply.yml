@@ -35,5 +35,3 @@ jobs:
 
         echo "Running puppet apply (2 of 2)..."
         sudo /opt/puppetlabs/puppet/bin/puppet apply -e "include buildkite_agent"
-
-        cat /usr/local/etc/buildkite-agent/buildkite-agent.cfg
