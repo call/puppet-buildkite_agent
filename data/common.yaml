@@ -1,1 +1,2 @@
 ---
+buildkite_agent::foo: bar

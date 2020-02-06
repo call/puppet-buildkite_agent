@@ -54,6 +54,10 @@ define buildkite_agent::config (
   Optional[String] $wait_for_gcp_labels_timeout = undef,
 ) {
 
+  file { '/usr/local/etc/buildkite-agent/':
+    ensure => directory,
+  }
+
   $defaults = {
     'path'   => $path,
     'section' => undef,
