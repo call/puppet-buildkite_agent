@@ -1,2 +1,3 @@
 ---
-buildkite_agent::foo: bar
+buildkite_agent::bk_name: "%hostname-%n"
+buildkite_agent::tags: "queue=myqueue"

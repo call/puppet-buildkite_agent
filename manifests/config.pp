@@ -27,7 +27,7 @@ define buildkite_agent::config (
   Optional[String] $log_format = undef,
   Optional[String] $metrics_datadog = undef,
   Optional[String] $metrics_datadog_host = undef,
-  Optional[String] $bk_name = undef,
+  Optional[String] $bk_name = undef, # Has 'bk_' prefix to avoid name collision
   Optional[String] $no_color = undef,
   Optional[String] $no_command_eval = undef,
   Optional[String] $no_git_submodules = undef,
@@ -48,6 +48,7 @@ define buildkite_agent::config (
   Optional[String] $tags_from_gcp_labels = undef,
   Optional[String] $tags_from_host = undef,
   Optional[String] $timestamp_lines = undef,
+  Optional[String] $token = undef,
   Optional[String] $wait_for_ec2_tags_timeout = undef,
   Optional[String] $wait_for_gcp_labels_timeout = undef,
 ) {
@@ -103,15 +104,23 @@ define buildkite_agent::config (
     'tags-from-gcp-labels'          => $tags_from_gcp_labels,
     'tags-from-host'                => $tags_from_host,
     'timestamp-lines'               => $timestamp_lines,
+    'token'                         => $token,
     'wait-for-ec2-tags-timeout'     => $wait_for_ec2_tags_timeout,
     'wait-for-gcp-labels-timeout'   => $wait_for_gcp_labels_timeout,
   }
 
   $settings.each |String $key, Optional[String] $val| {
     if $val {
+
+      $line = $val ? {
+        Boolean => "${key}=${val}",
+        Integer => "${key}=${val}",
+        String  => "${key}=\"${val}\"",
+      }
+
       file_line { "setting_${key}":
         path => $config_file_path,
-        line => "${key}=${val}",
+        line => $line,
       }
     }
 
