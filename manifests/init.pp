@@ -1,6 +1,6 @@
-# @summary A short summary of the purpose of this class
+# @summary The main class for buildkite_agent
 #
-# A description of what this class does
+# Entrypoint for the module
 #
 # @example
 #   include buildkite_agent
