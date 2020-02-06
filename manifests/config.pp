@@ -10,9 +10,9 @@ define buildkite_agent::config (
   Optional[String] $build_path = undef,
   Optional[String] $cancel_grace_period = undef,
   Optional[String] $cancel_signal = undef,
-  Optional[String] $debug = undef,
-  Optional[String] $debug_http = undef,
-  Optional[String] $disconnect_after_job = undef,
+  Optional[Boolean] $debug = undef,
+  Optional[Boolean] $debug_http = undef,
+  Optional[Boolean] $disconnect_after_job = undef,
   Optional[String] $disconnect_after_idle_timeout = undef,
   Optional[String] $endpoint = undef,
   Optional[String] $experiment = undef,
@@ -109,9 +109,8 @@ define buildkite_agent::config (
     'wait-for-gcp-labels-timeout'   => $wait_for_gcp_labels_timeout,
   }
 
-  $settings.each |String $key, Optional[String] $val| {
+  $settings.each |String $key, Optional[Variant[String, Integer, Boolean]] $val| {
     if $val {
-
       $line = $val ? {
         Boolean => "${key}=${val}",
         Integer => "${key}=${val}",

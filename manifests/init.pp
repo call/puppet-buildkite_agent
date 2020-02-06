@@ -10,16 +10,8 @@ class buildkite_agent (
   include archive
   include buildkite_agent::install
 
-  create_resources(buildkite_agent::config, $configs)
+  if $configs {
+    create_resources(buildkite_agent::config, $configs)
+  }
 
-  # if $configs {
-  #   $configs.each |String $key, Hash[String, Variant[String, Integer, Boolean]]]
-
-  #   buildkite_agent::config { $key:
-  #   tags => 'queue=mini',
-  # }
-  # }
-  # buildkite_agent::config { 'primary':
-  #   tags => 'queue=mini',
-  # }
 }
