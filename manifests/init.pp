@@ -7,4 +7,6 @@
 class buildkite_agent {
   include archive
   include buildkite_agent::install
+
+  buildkite_agent::config { 'primary': }
 }
