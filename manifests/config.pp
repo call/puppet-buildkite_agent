@@ -1,8 +1,9 @@
-# @summary A short summary of the purpose of this class
+# @summary A short summary of the purpose of this defined type.
 #
-# A description of what this class does
+# A description of what this defined type does
 #
 # @example
-#   include buildkite_agent::config
-class buildkite_agent::config {
+#   buildkite_agent::config { 'namevar': }
+define buildkite_agent::config (
+) {
 }
