@@ -27,7 +27,7 @@ define buildkite_agent::config (
   Optional[String] $log_format = undef,
   Optional[Boolean] $metrics_datadog = undef,
   Optional[String] $metrics_datadog_host = undef,
-  Optional[String] $bk_name = undef, # Has 'bk_' prefix to avoid name collision
+  Optional[String] $bk_name = undef, # Has 'bk_' prefix to avoid namevar collision
   Optional[Boolean] $no_color = undef,
   Optional[Boolean] $no_command_eval = undef,
   Optional[Boolean] $no_git_submodules = undef,
@@ -117,7 +117,7 @@ define buildkite_agent::config (
         String  => "${key}=\"${val}\"",
       }
 
-      file_line { "setting_${key}":
+      file_line { "${name}_${key}":
         path => $config_file_path,
         line => $line,
       }
