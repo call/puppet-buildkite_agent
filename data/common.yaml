@@ -4,6 +4,7 @@ buildkite_agent::install::package_ensure: '3.19.0'
 buildkite_agent::install::repository_url: 'https://github.com/buildkite/agent/releases/download/'
 buildkite_agent::configs:
   my-bk-config:
+    config_file_path: '/usr/local/etc/buildkite-agent/buildkite-agent.cfg'
     bk_name: 'foofoobar'
     tags: 'queue=foobarbar'
     debug: true

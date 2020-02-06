@@ -5,7 +5,7 @@
 # @example
 #   buildkite_agent::config { 'namevar': }
 define buildkite_agent::config (
-  String[1] $config_file_path = '/usr/local/etc/buildkite-agent/buildkite-agent.cfg',
+  String[1] $config_file_path,
   Optional[String] $bootstrap_script = undef,
   Optional[String] $build_path = undef,
   Optional[Boolean] $cancel_grace_period = undef,
