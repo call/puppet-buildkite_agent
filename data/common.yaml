@@ -1,3 +1,8 @@
 ---
-buildkite_agent::bk_name: "%hostname-%n"
-buildkite_agent::tags: "queue=myqueue"
+buildkite_agent::install::package_name: 'buildkite-agent-darwin-amd64'
+buildkite_agent::install::package_ensure: '3.19.0'
+buildkite_agent::install::repository_url: 'https://github.com/buildkite/agent/releases/download/'
+buildkite_agent::configs:
+  primary:
+    bk_name: 'foofoobar'
+    tags: 'queue=foobarbar'
