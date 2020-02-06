@@ -5,10 +5,10 @@
 # @example
 #   include buildkite_agent::install
 class buildkite_agent::install (
-  String[1] $package_name   = 'buildkite-agent-darwin-amd64',
-  String[1] $package_ensure = '3.19.0',
-  String[1] $repository_url = 'https://github.com/buildkite/agent/releases/download/',
-  String[1] $archive_name   = "${package_name}-${package_ensure}.tar.gz",
+  String[1] $package_name,
+  String[1] $package_ensure,
+  String[1] $repository_url,
+  String[1] $archive_name = "${package_name}-${package_ensure}.tar.gz",
   String[1] $package_source = "${repository_url}/v${package_ensure}/${archive_name}",
 ) {
 
