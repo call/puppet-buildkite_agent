@@ -10,9 +10,11 @@ A Puppet module to manage Buildkite Agent services on macOS nodes.
       - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Setup](#setup)
-    - [What buildkite_agent affects **OPTIONAL**](#what-buildkiteagent-affects-optional)
-    - [Setup Requirements **OPTIONAL**](#setup-requirements-optional)
+    - [What buildkite_agent affects](#what-buildkiteagent-affects)
+    - [Setup Requirements](#setup-requirements)
     - [Beginning with buildkite_agent](#beginning-with-buildkiteagent)
+      - [Without Hiera](#without-hiera)
+      - [With Hiera](#with-hiera)
   - [Usage](#usage)
   - [Reference](#reference)
   - [Limitations](#limitations)
@@ -21,31 +23,45 @@ A Puppet module to manage Buildkite Agent services on macOS nodes.
 
 ## Description
 
-Buildkite Agent is a small Go binary used to run Buildkite jobs. A single physical or virtual host can run multiple, independently configured Buildkite Agent services. This module is designed for use with Hiera. Settings for Buildkite Agent services can be defined as Hiera hashes, providing a data-driven mechanism for managing complex configurations of multiple Buildkite Agents.
+Buildkite Agent is a small Go binary used to run jobs from [Buildkite](https://buildkite.com). A single physical or virtual host can run multiple, independently configured Buildkite Agent services.
+
+This module is designed for use with Hiera. Settings for Buildkite Agent services can be defined as Hiera hashes, providing a data-driven mechanism for managing complex configurations of multiple Buildkite Agents.
 
 This module currently supports only macOS.
 
 ## Setup
 
-### What buildkite_agent affects **OPTIONAL**
+### What buildkite_agent affects
 
-If it's obvious what your module touches, you can skip this section. For example, folks can probably figure out that your mysql_instance module affects their MySQL instances.
+* Download and installation of the `buildkite-agent` `tar` archive from GitHub.
+* Management of multiple Buildkite Agent configuration files
+* Management of multiple Buildkite Agent `launchd` jobs
 
-If there's more that they should know about, though, this is the place to mention:
+### Setup Requirements
 
-* Files, packages, services, or operations that the module will alter, impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled, another module, etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps for upgrading, you might want to include an additional "Upgrading" section here.
+This module depends on the `puppetlabs/stdlib` and `puppet/archive` modules.
 
 ### Beginning with buildkite_agent
 
-The very basic steps needed for a user to get the module up and running. This can include setup steps, if necessary, or it can be an example of the most basic use of the module.
+#### Without Hiera
+
+```puppet
+include buildkite_agent::install
+
+buildkite_agent::config { 'primary':
+  config_file_path => '/usr/local/etc/buildkite-agent/buildkite-agent.cfg',
+]
+
+buildkite_agent::service { 'primary':
+  user => 'call',
+}
+```
+
+#### With Hiera
+
+```puppet
+include buildkite_agent
+```
 
 ## Usage
 
