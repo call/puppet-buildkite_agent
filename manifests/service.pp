@@ -6,33 +6,29 @@
 #   buildkite_agent::service { 'namevar': }
 define buildkite_agent::service (
   String[1] $user,
-  String[1] $bk_name = $name,
+  String[1] $bk_name                 = $name,
   Enum['stopped', 'running'] $ensure = 'running',
-  String[1] $bk_dir = "/Users/${user}/.buildkite-agent",
-  String[1] $label = "com.buildkite.buildkite-agent-${bk_name}",
-  String[1] $launchagents_path = "/Users/${user}/Library/LaunchAgents",
-  String[1] $plist_path = "${launchagents_path}/${label}.plist",
-  String[1] $config_path = "${bk_dir}/${label}.cfg",
-  String[1] $bin_path = '/usr/local/bin/buildkite-agent',
-  String[1] $path = '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
-  String[1] $stdout_path = "${bk_dir}/log/buildkite-agent.log",
-  String[1] $stderr_path = "${bk_dir}/log/buildkite-agent.log",
-  Boolean $allow_clean_exit = false,
-  Boolean $debug = false,
-  Boolean $run_at_load = true,
-  Boolean $interactive = false,
-  Integer $throttle_interval = 30,
+  String[1] $label                   = "com.buildkite.buildkite-agent-${bk_name}",
+  String[1] $bk_dir                  = $user ? {
+    'root'  => '/var/root/.buildkite-agent',
+    default => "/Users/${user}/.buildkite-agent",
+  },
+  String[1] $launchagents_path       = $user ? {
+    'root'  => '/Library/LaunchAgents',
+    default => "/Users/${user}/Library/LaunchAgents",
+  },
+  String[1] $plist_path              = "${launchagents_path}/${label}.plist",
+  String[1] $config_path             = "${bk_dir}/${label}.cfg",
+  String[1] $bin_path                = '/usr/local/bin/buildkite-agent',
+  String[1] $path                    = '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
+  String[1] $stdout_path             = "${bk_dir}/log/buildkite-agent.log",
+  String[1] $stderr_path             = "${bk_dir}/log/buildkite-agent.log",
+  Boolean $allow_clean_exit          = false,
+  Boolean $debug                     = false,
+  Boolean $run_at_load               = true,
+  Boolean $interactive               = false,
+  Integer $throttle_interval         = 30,
 ) {
-
-  $ensure_dirs = [
-    $bk_dir,
-    "${bk_dir}/log",
-  ]
-
-  file { $ensure_dirs:
-    ensure => directory,
-    owner  => $user,
-  }
 
   $program_args = $debug ? {
     true  => [$bin_path, 'start', '--debug'],
