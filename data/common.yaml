@@ -5,12 +5,17 @@ buildkite_agent::install::repository_url: 'https://github.com/buildkite/agent/re
 buildkite_agent::configs:
   primary:
     config_file_path: '/usr/local/etc/buildkite-agent/buildkite-agent.cfg'
-    bk_name: 'foofoobar'
     tags: 'queue=foobarbar'
     debug: true
     priority: 1
+  secondary:
+    config_file_path: '/usr/local/etc/buildkite-agent/buildkite-agent.cfg'
+    tags: 'queue=foobarbar'
+    debug: false
+    priority: 2
 buildkite_agent::services:
   primary:
     user: 'runner'
-    bk_name: 'primary'
+  secondary:
+    user: 'runner'
 

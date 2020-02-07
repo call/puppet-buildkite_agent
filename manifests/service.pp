@@ -6,7 +6,7 @@
 #   buildkite_agent::service { 'namevar': }
 define buildkite_agent::service (
   String[1] $user,
-  String[1] $bk_name,
+  String[1] $bk_name = $name,
   Enum['stopped', 'running'] $ensure = 'running',
   String[1] $bk_dir = "/Users/${user}/.buildkite-agent",
   String[1] $label = "com.buildkite.buildkite-agent-${bk_name}",
@@ -24,8 +24,14 @@ define buildkite_agent::service (
   Integer $throttle_interval = 30,
 ) {
 
-  file { [$bk_dir, "${bk_dir}/log"]:
+  $ensure_dirs = [
+    $bk_dir,
+    "${bk_dir}/log",
+  ]
+
+  file { $ensure_dirs:
     ensure => directory,
+    owner  => $user,
   }
 
   $program_args = $debug ? {
