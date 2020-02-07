@@ -37,6 +37,6 @@ jobs:
         sudo /opt/puppetlabs/puppet/bin/puppet apply -e "include buildkite_agent"
 
         ## Test
-        cat /var/root/.buildkite-agent/buildkite-agent-primary.cfg
-        cat /var/root/.buildkite-agent/buildkite-agent-secondary.cfg
+        sudo cat /var/root/.buildkite-agent/buildkite-agent-primary.cfg
+        sudo cat /var/root/.buildkite-agent/buildkite-agent-secondary.cfg
         sudo launchctl list | grep buildkite
