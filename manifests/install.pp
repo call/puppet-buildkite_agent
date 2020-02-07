@@ -11,11 +11,11 @@ class buildkite_agent::install (
   String[1] $bin_path,
   String[1] $archive_name = "${package_name}-${package_ensure}.tar.gz",
   String[1] $package_source = "${repository_url}/v${package_ensure}/${archive_name}",
-  Optional[Hash[String, Hash[String, String]]] $dirs,
+  Optional[Hash[String, Hash[String, String]]] $files,
 ) {
 
-  if $dirs {
-    create_resources(file, $dirs)
+  if $files {
+    create_resources(file, $files)
   }
 
   $bk_version = $facts['buildkite_agent_version']
