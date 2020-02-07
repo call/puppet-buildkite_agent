@@ -2,14 +2,26 @@
 buildkite_agent::install::package_name: 'buildkite-agent-darwin-amd64'
 buildkite_agent::install::package_ensure: '3.19.0'
 buildkite_agent::install::repository_url: 'https://github.com/buildkite/agent/releases/download/'
+buildkite_agent::install::bin_path: '/usr/local/bin/buildkite-agent'
+buildkite_agent::install::files:
+  /usr/local/bin/buildkite-agent:
+    ensure: 'present'
+    owner: 'root'
+    group: 'admin'
+    mode: '0755'
+  /usr/local/etc/buildkite-agent/:
+    ensure: 'directory'
+    owner: 'root'
+    group: 'wheel'
+    mode: '0755'
 buildkite_agent::configs:
   primary:
-    config_file_path: '/usr/local/etc/buildkite-agent/buildkite-agent-primary.cfg'
+    config_path: '/usr/local/etc/buildkite-agent/buildkite-agent-primary.cfg'
     tags: 'queue=foobarbar'
     debug: true
     priority: 1
   secondary:
-    config_file_path: '/usr/local/etc/buildkite-agent/buildkite-agent-secondary.cfg'
+    config_path: '/usr/local/etc/buildkite-agent/buildkite-agent-secondary.cfg'
     tags: 'queue=foobarbar'
     debug: false
     priority: 2
