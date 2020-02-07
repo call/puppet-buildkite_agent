@@ -1,9 +1,69 @@
-# @summary A short summary of the purpose of this defined type.
+# @summary Manages launchd jobs for buildkite-agent.
 #
-# A description of what this defined type does
+# Creates and ensures state of LaunchAgents
 #
 # @example
 #   buildkite_agent::service { 'namevar': }
 define buildkite_agent::service (
+  String[1] $user,
+  String[1] $bk_name,
+  String[1] $bk_dir = "/Users/${user}/.buildkite-agent",
+  String[1] $label = "com.buildkite.buildkite-agent-${bk_name}",
+  String[1] $launchagents_path = "/Users/${user}/Library/LaunchAgents",
+  String[1] $plist_path = "${launchagents_path}/${label}.plist",
+  String[1] $config_path = "${bk_dir}/${label}.cfg",
+  String[1] $bin_path = '/usr/local/bin/buildkite-agent',
+  String[1] $path = '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
+  String[1] $stdout_path = "${bk_dir}/log/buildkite-agent.log",
+  String[1] $stderr_path = "${bk_dir}/log/buildkite-agent.log",
+  Boolean $allow_clean_exit = false,
+  Boolean $debug = false,
+  Boolean $run_at_load = true,
+  Boolean $interactive = false,
+  Integer $throttle_interval = 30,
 ) {
+
+  file { [dirname($bk_dir), "${bk_dir}/log"]:
+    ensure => directory,
+  }
+
+  $debug_arg = $debug ? {
+    true  => '--debug',
+    false => undef,
+  }
+
+  $keep_alive = $allow_clean_exit ? {
+    true  => { 'SuccessfulExit' => false },
+    false => true,
+  }
+
+  $process_type = $interactive ? {
+    true  => 'Interactive',
+    false => 'Standard',
+  }
+
+  $data = {
+    'EnvironmentVariables' => {
+      'BUILDKITE_AGENT_CONFIG' => $config_path,
+      'PATH'                   => $path,
+    },
+    'KeepAlive'            => $keep_alive,
+    'Label'                => $label,
+    'ProcessType'          => $process_type,
+    'ProgramArguments'     => [
+      $bin_path,
+      'start',
+      $debug_arg,
+    ],
+    'RunAtLoad'            => $run_at_load,
+    'StandardErrorPath'    => $stderr_path,
+    'StandardOutPath'      => $stdout_path,
+    'ThrottleInterval'     => $throttle_interval,
+  }
+
+  file { $plist_path:
+    ensure  => present,
+    content => hash2plist($data),
+  }
+
 }
