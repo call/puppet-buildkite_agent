@@ -37,13 +37,13 @@ class buildkite_agent::install (
       refreshonly => true,
       before      => File['/usr/local/bin/buildkite-agent'],
     }
+  }
 
-    file { '/usr/local/bin/buildkite-agent':
-      ensure => 'present',
-      owner  => 'root',
-      group  => 'admin',
-      mode   => '0755',
-    }
+  file { '/usr/local/bin/buildkite-agent':
+    ensure => 'present',
+    owner  => 'root',
+    group  => 'admin',
+    mode   => '0755',
   }
 
 }
