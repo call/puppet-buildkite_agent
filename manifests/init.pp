@@ -16,7 +16,7 @@ class buildkite_agent (
   }
 
   if $services {
-    create_resources(buildkite_agent::config, $services)
+    create_resources(buildkite_agent::service, $services)
   }
 
 }
