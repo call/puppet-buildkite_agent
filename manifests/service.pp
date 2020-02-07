@@ -28,9 +28,9 @@ define buildkite_agent::service (
     ensure => directory,
   }
 
-  $debug_arg = $debug ? {
-    true  => '--debug',
-    false => '',
+  $program_args = $debug ? {
+    true  => [$bin_path, 'start', '--debug'],
+    false => [$bin_path, 'start']
   }
 
   $keep_alive = $allow_clean_exit ? {
@@ -51,11 +51,7 @@ define buildkite_agent::service (
     'KeepAlive'            => $keep_alive,
     'Label'                => $label,
     'ProcessType'          => $process_type,
-    'ProgramArguments'     => [
-      $bin_path,
-      'start',
-      $debug_arg,
-    ],
+    'ProgramArguments'     => $program_args,
     'RunAtLoad'            => $run_at_load,
     'StandardErrorPath'    => $stderr_path,
     'StandardOutPath'      => $stdout_path,
