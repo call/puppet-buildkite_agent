@@ -4,12 +4,12 @@ buildkite_agent::install::package_ensure: '3.19.0'
 buildkite_agent::install::repository_url: 'https://github.com/buildkite/agent/releases/download/'
 buildkite_agent::configs:
   primary:
-    config_file_path: '/usr/local/etc/buildkite-agent/buildkite-agent.cfg'
+    config_file_path: '/usr/local/etc/buildkite-agent/buildkite-agent-primary.cfg'
     tags: 'queue=foobarbar'
     debug: true
     priority: 1
   secondary:
-    config_file_path: '/usr/local/etc/buildkite-agent/buildkite-agent.cfg'
+    config_file_path: '/usr/local/etc/buildkite-agent/buildkite-agent-secondary.cfg'
     tags: 'queue=foobarbar'
     debug: false
     priority: 2
