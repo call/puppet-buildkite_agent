@@ -8,6 +8,7 @@ class buildkite_agent (
   Optional[Hash[String, Hash[String, Variant[String, Integer, Boolean]]]] $configs,
   Optional[Hash[String, Hash[String, Variant[String, Integer, Boolean]]]] $services,
 ) {
+
   include archive
   include buildkite_agent::install
 

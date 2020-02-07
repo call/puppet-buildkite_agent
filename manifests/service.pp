@@ -6,7 +6,7 @@
 #   buildkite_agent::service { 'namevar': }
 define buildkite_agent::service (
   String[1] $user,
-  String[1] $bk_name                 = $name,
+  String[1] $bk_name                 = $name, # Instance namevar
   Enum['stopped', 'running'] $ensure = 'running',
   String[1] $label                   = "com.buildkite.buildkite-agent-${bk_name}",
   String[1] $bk_dir                  = $user ? {
