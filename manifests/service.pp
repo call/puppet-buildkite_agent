@@ -30,7 +30,7 @@ define buildkite_agent::service (
 
   $debug_arg = $debug ? {
     true  => '--debug',
-    false => undef,
+    false => '',
   }
 
   $keep_alive = $allow_clean_exit ? {
