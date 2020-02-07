@@ -24,17 +24,17 @@ define buildkite_agent::service (
   Integer $throttle_interval = 30,
 ) {
 
-  file { [dirname($bk_dir), "${bk_dir}/log"]:
+  file { [$bk_dir, "${bk_dir}/log"]:
     ensure => directory,
   }
 
   $program_args = $debug ? {
     true  => [$bin_path, 'start', '--debug'],
-    false => [$bin_path, 'start']
+    false => [$bin_path, 'start'],
   }
 
   $keep_alive = $allow_clean_exit ? {
-    true  => { 'SuccessfulExit' => false },
+    true  => {'SuccessfulExit' => false},
     false => true,
   }
 
