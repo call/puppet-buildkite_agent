@@ -7,6 +7,7 @@
 define buildkite_agent::service (
   String[1] $user,
   String[1] $bk_name,
+  Enum['stopped', 'running'] $ensure = 'running',
   String[1] $bk_dir = "/Users/${user}/.buildkite-agent",
   String[1] $label = "com.buildkite.buildkite-agent-${bk_name}",
   String[1] $launchagents_path = "/Users/${user}/Library/LaunchAgents",
@@ -64,6 +65,26 @@ define buildkite_agent::service (
   file { $plist_path:
     ensure  => present,
     content => hash2plist($data),
+  }
+
+  exec { "reload_job_${label}":
+    command     => "/bin/launchctl unload -w ${plist_path} && /bin/launchctl load -w ${plist_path}",
+    subscribe   => File[$plist_path, '/usr/local/bin/buildkite-agent'],
+    refreshonly => true,
+  }
+
+  if $ensure == 'running' {
+    exec { "ensure_job_running_${label}":
+      command => "/bin/launchctl load -w ${plist_path}",
+      unless  => "/bin/launchctl list | /usr/bin/grep ${label}",
+      require => File[$plist_path],
+    }
+  } else {
+    exec { "ensure_job_stopped_${label}":
+      command => "/bin/launchctl load -w ${plist_path}",
+      onlyif  => "/bin/launchctl list | /usr/bin/grep ${label}",
+      require => File[$plist_path],
+    }
   }
 
 }
