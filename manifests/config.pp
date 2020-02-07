@@ -114,7 +114,7 @@ define buildkite_agent::config (
       }
 
       file_line { "${name}_${key}":
-        path => $config_file_path,
+        path => $config_path,
         line => $line,
       }
     }
