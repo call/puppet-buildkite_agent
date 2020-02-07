@@ -27,7 +27,7 @@ define buildkite_agent::config (
   Optional[String] $log_format                     = undef,
   Optional[Boolean] $metrics_datadog               = undef,
   Optional[String] $metrics_datadog_host           = undef,
-  Optional[String] $bk_name                        = $name, # Uses instance namevar
+  Optional[String] $bk_name                        = "${facts['networking']['fqdn']}-${name}",
   Optional[Boolean] $no_color                      = undef,
   Optional[Boolean] $no_command_eval               = undef,
   Optional[Boolean] $no_git_submodules             = undef,
