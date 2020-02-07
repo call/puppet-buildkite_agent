@@ -1,25 +1,29 @@
 # buildkite_agent
 
-Welcome to your new module. A short overview of the generated parts can be found in the PDK documentation at https://puppet.com/pdk/latest/pdk_generating_modules.html .
+:warning: This module is in active development.
 
-The README template below provides a starting point with details about what information to include in your README.
+A Puppet module to manage Buildkite Agent services on macOS nodes.
 
 #### Table of Contents
 
-1. [Description](#description)
-2. [Setup - The basics of getting started with buildkite_agent](#setup)
-    * [What buildkite_agent affects](#what-buildkite_agent-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with buildkite_agent](#beginning-with-buildkite_agent)
-3. [Usage - Configuration options and additional functionality](#usage)
-4. [Limitations - OS compatibility, etc.](#limitations)
-5. [Development - Guide for contributing to the module](#development)
+- [buildkite_agent](#buildkiteagent)
+      - [Table of Contents](#table-of-contents)
+  - [Description](#description)
+  - [Setup](#setup)
+    - [What buildkite_agent affects **OPTIONAL**](#what-buildkiteagent-affects-optional)
+    - [Setup Requirements **OPTIONAL**](#setup-requirements-optional)
+    - [Beginning with buildkite_agent](#beginning-with-buildkiteagent)
+  - [Usage](#usage)
+  - [Reference](#reference)
+  - [Limitations](#limitations)
+  - [Development](#development)
+  - [Release Notes/Contributors/Etc. **Optional**](#release-notescontributorsetc-optional)
 
 ## Description
 
-Briefly tell users why they might want to use your module. Explain what your module does and what kind of problems users can solve with it.
+Buildkite Agent is a small Go binary used to run Buildkite jobs. A single physical or virtual host can run multiple, independently configured Buildkite Agent services. This module is designed for use with Hiera. Settings for Buildkite Agent services can be defined as Hiera hashes, providing a data-driven mechanism for managing complex configurations of multiple Buildkite Agents.
 
-This should be a fairly short description helps the user decide if your module is what they want.
+This module currently supports only macOS.
 
 ## Setup
 
