@@ -1,28 +1,19 @@
 require 'spec_helper'
 
-describe package('httpd'), :if => os[:family] == 'redhat' do
-  it { should be_installed }
-end
+set :backend, :exec
 
-describe package('apache2'), :if => os[:family] == 'ubuntu' do
-  it { should be_installed }
-end
-
-describe service('httpd'), :if => os[:family] == 'redhat' do
+describe service('com.buildkite.buildkite-agent-primary'), :if => os[:family] == 'darwin', :sudo => true do
   it { should be_enabled }
-  it { should be_running }
 end
 
-describe service('apache2'), :if => os[:family] == 'ubuntu' do
+describe service('com.buildkite.buildkite-agent-secondary'), :if => os[:family] == 'darwin', :sudo => true do
   it { should be_enabled }
-  it { should be_running }
 end
 
-describe service('org.apache.httpd'), :if => os[:family] == 'darwin' do
-  it { should be_enabled }
-  it { should be_running }
-end
+# describe service('buildkite-agent start'), :if => os[:family] == 'darwin', :sudo => true do
+#   it { should be_running }
+# end
 
-describe port(80) do
+describe port(17600) do
   it { should be_listening }
 end
