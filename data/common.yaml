@@ -31,12 +31,12 @@ buildkite_agent::install::files:
     mode: '0755'
 buildkite_agent::configs:
   primary:
-    config_path: '/Users/bcall/.buildkite-agent/buildkite-agent-primary.cfg'
+    config_path: '/Users/bcall/.buildkite-agent/com.buildkite.buildkite-agent-primary.cfg'
     tags: 'queue=foobarbar'
     debug: true
     priority: 1
   secondary:
-    config_path: '/Users/bcall/.buildkite-agent/buildkite-agent-secondary.cfg'
+    config_path: '/Users/bcall/.buildkite-agent/com.buildkite.buildkite-agent-secondary.cfg'
     tags: 'queue=foobarbar'
     debug: false
     priority: 2
