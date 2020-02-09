@@ -66,21 +66,21 @@ define buildkite_agent::service (
   }
 
   exec { "reload_job_${label}":
-    command     => "/bin/launchctl unload -w ${plist_path} && /bin/launchctl load -w ${plist_path}",
+    command     => "/usr/bin/sudo -H -u ${user} /bin/bash -c '/bin/launchctl unload -w ${plist_path} && /bin/launchctl load -w ${plist_path}'",
     subscribe   => File[$plist_path, '/usr/local/bin/buildkite-agent'],
     refreshonly => true,
   }
 
   if $ensure == 'running' {
     exec { "ensure_job_running_${label}":
-      command => "/bin/launchctl load -w ${plist_path}",
+      command => "/usr/bin/sudo -H -u ${user} /bin/bash -c '/bin/launchctl load -w ${plist_path}'",
       unless  => "/bin/launchctl list | /usr/bin/grep ${label}",
       require => File[$plist_path],
     }
   } else {
     exec { "ensure_job_stopped_${label}":
-      command => "/bin/launchctl load -w ${plist_path}",
-      onlyif  => "/bin/launchctl list | /usr/bin/grep ${label}",
+      command => "/usr/bin/sudo -H -u ${user} /bin/bash -c '/bin/launchctl load -w ${plist_path}'",
+      onlyif  => "/usr/bin/sudo -H -u ${user} /bin/bash -c '/bin/launchctl list | /usr/bin/grep ${label}'",
       require => File[$plist_path],
     }
   }

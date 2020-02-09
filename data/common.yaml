@@ -9,40 +9,40 @@ buildkite_agent::install::files:
     owner: 'root'
     group: 'admin'
     mode: '0755'
-  /var/root/.buildkite-agent/:
+  /Users/bcall/.buildkite-agent/:
     ensure: 'directory'
     owner: 'root'
     group: 'wheel'
     mode: '0755'
-  /var/root/.buildkite-agent/hooks/:
+  /Users/bcall/.buildkite-agent/hooks/:
     ensure: 'directory'
     owner: 'root'
     group: 'wheel'
     mode: '0755'
-  /var/root/.buildkite-agent/builds/:
+  /Users/bcall/.buildkite-agent/builds/:
     ensure: 'directory'
     owner: 'root'
     group: 'wheel'
     mode: '0755'
-  /var/root/.buildkite-agent/logs/:
+  /Users/bcall/.buildkite-agent/logs/:
     ensure: 'directory'
     owner: 'root'
     group: 'wheel'
     mode: '0755'
 buildkite_agent::configs:
   primary:
-    config_path: '/var/root/.buildkite-agent/buildkite-agent-primary.cfg'
+    config_path: '/Users/bcall/.buildkite-agent/buildkite-agent-primary.cfg'
     tags: 'queue=foobarbar'
     debug: true
     priority: 1
   secondary:
-    config_path: '/var/root/.buildkite-agent/buildkite-agent-secondary.cfg'
+    config_path: '/Users/bcall/.buildkite-agent/buildkite-agent-secondary.cfg'
     tags: 'queue=foobarbar'
     debug: false
     priority: 2
 buildkite_agent::services:
   primary:
-    user: 'runner'
+    user: 'bcall'
   secondary:
-    user: 'runner'
+    user: 'bcall'
 
