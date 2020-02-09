@@ -24,7 +24,7 @@ buildkite_agent::install::files:
     owner: 'root'
     group: 'wheel'
     mode: '0755'
-  /Users/bcall/.buildkite-agent/logs/:
+  /Users/bcall/.buildkite-agent/log/:
     ensure: 'directory'
     owner: 'root'
     group: 'wheel'
