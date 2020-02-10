@@ -19,4 +19,4 @@ jobs:
     - name: Publish to Puppet Forge
       uses: call/dockerfile-curl@master
       with:
-        args: '-D- --fail --silent --show-error --request POST "https://forgeapi.puppet.com/v3/releases" -F "file=@pkg/module.tar.gz" -H "Authorization: Bearer ${{ secrets. FORGE_API_KEY }}"'
+        args: '-D- --fail --silent --show-error --request POST "https://forgeapi.puppet.com/v3/releases" -F "file=@pkg/module.tar.gz" -H "Authorization: Bearer ${{ secrets.FORGE_API_KEY }}"'

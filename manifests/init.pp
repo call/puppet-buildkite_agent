@@ -5,6 +5,7 @@
 # @example
 #   include buildkite_agent
 class buildkite_agent (
+  String[1] $token,
   Optional[Hash[String, Hash[String, Variant[String, Integer, Boolean]]]] $configs,
   Optional[Hash[String, Hash[String, Variant[String, Integer, Boolean]]]] $services,
 ) {

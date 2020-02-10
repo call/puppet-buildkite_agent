@@ -55,6 +55,12 @@ describe file("/Users/#{USER}/.buildkite-agent/log/buildkite-agent.log") do
   it { should be_owned_by "#{USER}" }
   it { should be_grouped_into 'staff' }
   it { should be_mode 644 }
+  its(:content) { should contain 'Starting buildkite-agent' }
+  its(:content) { should contain 'Configuration loaded' }
+  its(:content) { should contain 'Registering agent with Buildkite' }
+  its(:content) { should contain 'Successfully registered agent' }
+  its(:content) { should contain 'Connecting to Buildkite' }
+  its(:content) { should contain 'Waiting for work' }
 end
 
 describe file("/Users/#{USER}/.buildkite-agent/buildkite-agent.cfg") do
