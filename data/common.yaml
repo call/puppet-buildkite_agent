@@ -21,3 +21,5 @@ buildkite_agent::configs:
     tags: 'queue=foobarbar'
     debug: true
     priority: 1
+buildkite_agent::services:
+  primary:
