@@ -23,3 +23,4 @@ buildkite_agent::configs:
     priority: 1
 buildkite_agent::services:
   primary:
+    bk_name: 'primary'
