@@ -21,4 +21,3 @@ buildkite_agent::configs:
     tags: 'queue=foobarbar'
     debug: true
     priority: 1
-
