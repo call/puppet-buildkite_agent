@@ -10,7 +10,7 @@ end
 
 # This handles checking the service is running as a workaround
 describe command('launchctl list | grep com.buildkite.buildkite-agent-primary') do
-  its(:exit_status) { should eq 0}
+  its(:exit_status) { should eq 0 }
 end
 
 describe file('/usr/local/bin/buildkite-agent') do
