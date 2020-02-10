@@ -58,6 +58,8 @@ define buildkite_agent::service (
     content => hash2plist($data),
   }
 
+  # Execs to manage LaunchAgents per-user, this is not supported by the launchd provider
+  # https://tickets.puppetlabs.com/browse/PUP-1261
   exec { "reload_job_${label}":
     command     => "/usr/bin/sudo -H -u ${user} /bin/bash -c '/bin/launchctl unload -w ${plist_path} && /bin/launchctl load -w ${plist_path}'",
     subscribe   => File[$plist_path, '/usr/local/bin/buildkite-agent'],
