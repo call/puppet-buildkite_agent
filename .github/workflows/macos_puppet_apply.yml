@@ -32,11 +32,11 @@ jobs:
 
         echo "Running puppet apply (1 of 2)..."
         sudo /opt/puppetlabs/puppet/bin/puppet apply -e \
-          'buildkite_agent{ "token" => "${{ secrets.BUILDKITE_AGENT_TOKEN }}" }'
+          "class { 'buildkite_agent': token => '${{ secrets.BUILDKITE_AGENT_TOKEN }}' }"
 
         echo "Running puppet apply (2 of 2)..."
         sudo /opt/puppetlabs/puppet/bin/puppet apply -e \
-          'buildkite_agent{ "token" => "${{ secrets.BUILDKITE_AGENT_TOKEN }}" }'
+          "class { 'buildkite_agent': token => '${{ secrets.BUILDKITE_AGENT_TOKEN }}' }"
 
         ## Test
         gem install bundler
