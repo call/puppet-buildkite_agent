@@ -55,6 +55,9 @@ define buildkite_agent::service (
 
   file { $plist_path:
     ensure  => present,
+    owner   => $user,
+    group   => 'staff',
+    mode    => '0644',
     content => hash2plist($data),
   }
 
