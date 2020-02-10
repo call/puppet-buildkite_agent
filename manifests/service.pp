@@ -65,7 +65,7 @@ define buildkite_agent::service (
   # https://tickets.puppetlabs.com/browse/PUP-1261
   exec { "reload_job_${label}":
     command     => "/usr/bin/sudo -H -u ${user} /bin/bash -c '/bin/launchctl unload -w ${plist_path} && /bin/launchctl load -w ${plist_path}'",
-    subscribe   => File[$plist_path, '/usr/local/bin/buildkite-agent'],
+    subscribe   => File[$plist_path, $bin_path],
     refreshonly => true,
   }
 
@@ -77,7 +77,7 @@ define buildkite_agent::service (
     }
   } else {
     exec { "ensure_job_stopped_${label}":
-      command => "/usr/bin/sudo -H -u ${user} /bin/bash -c '/bin/launchctl load -w ${plist_path}'",
+      command => "/usr/bin/sudo -H -u ${user} /bin/bash -c '/bin/launchctl unload -w ${plist_path}'",
       onlyif  => "/usr/bin/sudo -H -u ${user} /bin/bash -c '/bin/launchctl list | /usr/bin/grep ${label}'",
       require => File[$plist_path],
     }
