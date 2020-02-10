@@ -49,7 +49,7 @@ define buildkite_agent::config (
   Optional[Boolean] $tags_from_gcp_labels          = undef,
   Optional[Boolean] $tags_from_host                = undef,
   Optional[Boolean] $timestamp_lines               = undef,
-  Optional[String] $token                          = undef,
+  Optional[String] $token                          = $::buildkite_agent::token,
   Optional[String] $wait_for_ec2_tags_timeout      = undef,
   Optional[String] $wait_for_gcp_labels_timeout    = undef,
 ) {
