@@ -11,7 +11,7 @@ define buildkite_agent::service (
   String[1] $label                   = "com.buildkite.buildkite-agent-${bk_name}",
   String[1] $bk_dir                  = "/Users/${user}/.buildkite-agent",
   String[1] $plist_path              = "/Users/${user}/Library/LaunchAgents/${label}.plist",
-  String[1] $config_path             = "${bk_dir}/.buildkite-agent.cfg",
+  String[1] $config_path             = "${bk_dir}/buildkite-agent.cfg",
   String[1] $bin_path                = '/usr/local/bin/buildkite-agent',
   String[1] $path                    = '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
   String[1] $stdout_path             = "${bk_dir}/log/buildkite-agent.log",
