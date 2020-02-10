@@ -40,4 +40,5 @@ jobs:
         sudo /opt/puppetlabs/puppet/bin/puppet apply -e "include buildkite_agent"
 
         ## Test
+        gem install bundler
         cd test && bundle install && rake
