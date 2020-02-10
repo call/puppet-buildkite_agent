@@ -5,44 +5,20 @@ buildkite_agent::install::repository_url: 'https://github.com/buildkite/agent/re
 buildkite_agent::install::bin_path: '/usr/local/bin/buildkite-agent'
 buildkite_agent::install::files:
   /usr/local/bin/buildkite-agent:
-    ensure: 'present'
+    ensure: 'file'
     owner: 'root'
     group: 'admin'
-    mode: '0755'
   /Users/bcall/.buildkite-agent/:
     ensure: 'directory'
-    owner: 'root'
-    group: 'wheel'
-    mode: '0755'
   /Users/bcall/.buildkite-agent/hooks/:
     ensure: 'directory'
-    owner: 'root'
-    group: 'wheel'
-    mode: '0755'
   /Users/bcall/.buildkite-agent/builds/:
     ensure: 'directory'
-    owner: 'root'
-    group: 'wheel'
-    mode: '0755'
   /Users/bcall/.buildkite-agent/log/:
     ensure: 'directory'
-    owner: 'root'
-    group: 'wheel'
-    mode: '0755'
 buildkite_agent::configs:
   primary:
-    config_path: '/Users/bcall/.buildkite-agent/com.buildkite.buildkite-agent-primary.cfg'
     tags: 'queue=foobarbar'
     debug: true
     priority: 1
-  secondary:
-    config_path: '/Users/bcall/.buildkite-agent/com.buildkite.buildkite-agent-secondary.cfg'
-    tags: 'queue=foobarbar'
-    debug: false
-    priority: 2
-buildkite_agent::services:
-  primary:
-    user: 'bcall'
-  secondary:
-    user: 'bcall'
 

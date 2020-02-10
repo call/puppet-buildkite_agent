@@ -5,7 +5,8 @@
 # @example
 #   buildkite_agent::config { 'namevar': }
 define buildkite_agent::config (
-  String[1] $config_path,
+  String[1] $user                                  = $facts['primary_user'],
+  String[1] $config_path                           = "/Users/${facts['primary_user']}/.buildkite-agent/buildkite-agent.cfg",
   Optional[String] $bootstrap_script               = undef,
   Optional[String] $build_path                     = undef,
   Optional[Boolean] $cancel_grace_period           = undef,
@@ -103,6 +104,7 @@ define buildkite_agent::config (
 
   file { $config_path:
     ensure => file,
+    owner  => $user,
   }
 
   $settings.each |String $key, Optional[Variant[String, Integer, Boolean]] $val| {
