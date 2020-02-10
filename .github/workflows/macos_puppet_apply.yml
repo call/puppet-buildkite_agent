@@ -39,3 +39,12 @@ jobs:
         ## Test
         gem install bundler
         cd test && bundle install && rake
+
+        echo "Listing processes"
+        ps aux | grep buildkite
+        echo "Listing user launchd jobs"
+        launchctl list | grep buildkite
+        echo "Listing root launchd jobs"
+        sudo launchctl list | grep buildkite
+        echo "Catting buildkite-agent log"
+        cat ~/.buildkite-agent/log/buildkite-agent.log
