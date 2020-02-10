@@ -7,7 +7,7 @@ module MakeMakefile::Logging
 end
 
 Facter.add(:buildkite_agent_version) do
-  confine kernel: ['Darwin']
+  confine kernel: 'Darwin'
   setcode do
     if find_executable 'buildkite-agent'
       `buildkite-agent --version`.split(' ')[2].chomp(',')

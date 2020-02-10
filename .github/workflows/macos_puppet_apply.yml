@@ -26,7 +26,7 @@ jobs:
       run: |
         set -euo pipefail
         echo "Creating tarball of puppet-buildkite_agent..."
-        tar -czvf ../module.tar.gz .
+        tar -cpjf ../module.tar.gz .
         echo "Installing puppet-buildkite_agent and dependencies..."
         sudo /opt/puppetlabs/puppet/bin/puppet module install ../module.tar.gz
 
@@ -35,3 +35,10 @@ jobs:
 
         echo "Running puppet apply (2 of 2)..."
         sudo /opt/puppetlabs/puppet/bin/puppet apply -e "include buildkite_agent"
+
+        ## Test
+        gem install bundler
+        cd test && bundle install && rake
+
+        echo "Catting buildkite-agent log"
+        cat ~/.buildkite-agent/log/buildkite-agent.log

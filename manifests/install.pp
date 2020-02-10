@@ -8,13 +8,28 @@ class buildkite_agent::install (
   String[1] $package_name,
   String[1] $package_ensure,
   String[1] $repository_url,
+  String[1] $bin_path,
   String[1] $archive_name = "${package_name}-${package_ensure}.tar.gz",
   String[1] $package_source = "${repository_url}/v${package_ensure}/${archive_name}",
+  String[1] $user = $facts['primary_user'],
 ) {
 
-  $bk_version = $facts['buildkite_agent_version']
+  $dirs = [
+    "/Users/${user}/.buildkite-agent/",
+    "/Users/${user}/.buildkite-agent/hooks/",
+    "/Users/${user}/.buildkite-agent/builds/",
+    "/Users/${user}/.buildkite-agent/log/"
+  ]
 
-  if $bk_version and (versioncmp($bk_version, $package_ensure) == 0) {
+  file { $dirs:
+    ensure => directory,
+    owner  => $user,
+    group  => 'staff',
+    mode   => '0755',
+  }
+
+  if $facts['buildkite_agent_version'] and
+    (versioncmp($facts['buildkite_agent_version'], $package_ensure) == 0) {
     notify{ "Buildkite-agent ${package_ensure} is installed as specified.": }
   } else {
     notify{ "Buildkite-agent ${package_ensure} not installed, installing...": }
@@ -32,18 +47,18 @@ class buildkite_agent::install (
     }
 
     exec { 'cp_buildkite_agent':
-      command     => "/bin/cp /tmp/${archive_name}-untar/buildkite-agent /usr/local/bin/buildkite-agent",
+      command     => "/bin/cp /tmp/${archive_name}-untar/buildkite-agent ${bin_path}",
       subscribe   => Archive[$archive_name],
       refreshonly => true,
-      before      => File['/usr/local/bin/buildkite-agent'],
+      before      => File[$bin_path],
     }
+  }
 
-    file { '/usr/local/bin/buildkite-agent':
-      ensure => 'present',
-      owner  => 'root',
-      group  => 'admin',
-      mode   => '0755',
-    }
+  file { $bin_path:
+    ensure => 'file',
+    owner  => 'root',
+    group  => 'admin',
+    mode   => '0755',
   }
 
 }
