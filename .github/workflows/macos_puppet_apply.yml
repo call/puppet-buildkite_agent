@@ -40,7 +40,7 @@ jobs:
 
         ## Test
         gem install bundler
-        cd test && bundle install --quiet --force --jobs=4
+        cd test && bundle install --quiet --jobs=4
         rake
 
         echo "Catting buildkite-agent log"
