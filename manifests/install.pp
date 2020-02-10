@@ -12,17 +12,20 @@ class buildkite_agent::install (
   String[1] $archive_name = "${package_name}-${package_ensure}.tar.gz",
   String[1] $package_source = "${repository_url}/v${package_ensure}/${archive_name}",
   String[1] $user = $facts['primary_user'],
-  Optional[Hash[String, Hash[String, String]]] $files,
 ) {
 
-  if $files {
-    $defaults = {
-      'owner'  => $user,
-      'group'  => 'staff',
-      'mode'   => '0755',
-    }
+  $dirs = [
+    "/Users/${user}/.buildkite-agent/",
+    "/Users/${user}/.buildkite-agent/hooks/",
+    "/Users/${user}/.buildkite-agent/builds/",
+    "/Users/${user}/.buildkite-agent/log/"
+  ]
 
-    create_resources(file, $files, $defaults)
+  file { $dirs:
+    ensure => directory,
+    owner  => $user,
+    group  => 'staff',
+    mode   => '0755',
   }
 
   if $facts['buildkite_agent_version'] and
@@ -49,6 +52,13 @@ class buildkite_agent::install (
       refreshonly => true,
       before      => File[$bin_path],
     }
+  }
+
+  file { $bin_path:
+    ensure => 'file',
+    owner  => 'root',
+    group  => 'admin',
+    mode   => '0755',
   }
 
 }

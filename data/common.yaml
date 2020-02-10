@@ -3,19 +3,6 @@ buildkite_agent::install::package_name: 'buildkite-agent-darwin-amd64'
 buildkite_agent::install::package_ensure: '3.19.0'
 buildkite_agent::install::repository_url: 'https://github.com/buildkite/agent/releases/download/'
 buildkite_agent::install::bin_path: '/usr/local/bin/buildkite-agent'
-buildkite_agent::install::files:
-  /usr/local/bin/buildkite-agent:
-    ensure: 'file'
-    owner: 'root'
-    group: 'admin'
-  /Users/bcall/.buildkite-agent/:
-    ensure: 'directory'
-  /Users/bcall/.buildkite-agent/hooks/:
-    ensure: 'directory'
-  /Users/bcall/.buildkite-agent/builds/:
-    ensure: 'directory'
-  /Users/bcall/.buildkite-agent/log/:
-    ensure: 'directory'
 buildkite_agent::configs:
   primary:
     tags: 'queue=foobarbar'
