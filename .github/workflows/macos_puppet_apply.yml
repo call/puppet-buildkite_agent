@@ -5,6 +5,9 @@ jobs:
     name: Puppet install and apply
     runs-on: macos-10.15
     steps:
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.6'
     - name: Checkout repository
       uses: actions/checkout@v1
     - name: Install puppet
@@ -37,4 +40,4 @@ jobs:
         sudo /opt/puppetlabs/puppet/bin/puppet apply -e "include buildkite_agent"
 
         ## Test
-        cd test && rake
+        cd test && bundle install && rake
