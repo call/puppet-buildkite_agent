@@ -35,17 +35,26 @@ This module currently supports __macOS only__.
 
 Setting the `token` parameter is the only requirement to get up and running.
 
-```puppet
-class { 'buildkite_agent':
-  token => '757613ad20dfaf9b7b4b37d0b4ed4b6c',
-}
-```
+- In-manifest
+
+  ```puppet
+  class { 'buildkite_agent':
+    token => '757613ad20dfaf9b7b4b37d0b4ed4b6c',
+  }
+  ```
+
+- Standalone
+
+  ```bash
+  sudo puppet module install call-buildkite_agent && \
+  sudo puppet apply -e "class {'buildkite_agent': token => '757613ad20dfaf9b7b4b37d0b4ed4b6c'}"
+  ```
 
 Replace the value for `token` with your Buildkite [Agent Token](https://buildkite.com/docs/agent/v3/tokens).
 
 ## Usage
 
-To run a single Buildkite Agent with the default LaunchAgent label of `com.buildkite.buildkite-agent-primary`, use the example above.
+To run a single Buildkite Agent with the default LaunchAgent label of `com.buildkite.buildkite-agent-primary`, use the examples above.
 
 :bulb:  If `buildkite_agent::config::user` or `buildkite_agent::service::user` are unspecified, the user with greatest login time, as determined by the custom fact `lib/facter/primary_user.rb`, will be used as the default.
 
