@@ -21,14 +21,13 @@ A Puppet module to manage Buildkite Agent on macOS.
 
 [`buildkite-agent`](https://buildkite.com/docs/agent/v3) is a small Go binary that runs [Buildkite](https://buildkite.com) jobs.
 
-The `buildkite_agent` module
+The `buildkite_agent` Puppet module
 
 - Installs `buildkite-agent` from GitHub release tarball
 - Manages Buildkite Agent [config files and settings](https://buildkite.com/docs/agent/v3/configuration)
 - Manages Buildkite Agent [launchd](https://www.launchd.info/) user agents
 
-
-This module currently supports macOS only. :apple:
+This module currently supports __macOS only__. :apple:
 
 ## Setup
 
