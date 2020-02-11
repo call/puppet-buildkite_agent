@@ -1,4 +1,4 @@
-name: MacOS puppet apply
+name: MacOS QA
 on: [push]
 jobs:
   pdk:
@@ -42,6 +42,3 @@ jobs:
         gem install bundler
         cd test && bundle install --quiet --jobs=4
         rake
-
-        echo "Catting buildkite-agent log"
-        cat ~/.buildkite-agent/log/buildkite-agent.log
