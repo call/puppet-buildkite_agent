@@ -45,7 +45,7 @@ Replace the value for `token` with your Buildkite [Agent Token](https://buildkit
 
 ## Usage
 
-To run a single Buildkite Agent with the default LaunchAgent label of `com.buildkite.buildkite-agent-primary`, use the example above (with your own token).
+To run a single Buildkite Agent with the default LaunchAgent label of `com.buildkite.buildkite-agent-primary`, use the example above.
 
 :bulb:  If `buildkite_agent::config::user` or `buildkite_agent::service::user` are unspecified, the user with greatest login time, as determined by the custom fact `lib/facter/primary_user.rb`, will be used as the default.
 
