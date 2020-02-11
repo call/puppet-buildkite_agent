@@ -23,7 +23,7 @@ The `buildkite_agent` Puppet module:
 
 - Installs `buildkite-agent` from GitHub [release](https://github.com/buildkite/agent/releases) tarball
 - Manages Buildkite Agent [config files and settings](https://buildkite.com/docs/agent/v3/configuration)
-- Manages Buildkite Agent user [LaunchAgents](https://github.com/buildkite/agent/blob/master/templates/launchd_local_with_gui.plist) ([launchd](https://www.launchd.info/) jobs)
+- Manages Buildkite Agent user [LaunchAgents](https://github.com/buildkite/agent/blob/master/templates/launchd_local_with_gui.plist)
 
 Classes and defined types use default parameter values sourced from Buildkite's [macOS agent documentation](https://buildkite.com/docs/agent/v3/osx).
 
