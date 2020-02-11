@@ -1,8 +1,6 @@
 # buildkite_agent
 
-:warning: This module is in active development.
-
-A Puppet module to manage Buildkite Agent services on macOS nodes.
+A Puppet module to manage Buildkite Agent on macOS.
 
 ## Table of Contents
 
@@ -21,19 +19,24 @@ A Puppet module to manage Buildkite Agent services on macOS nodes.
 
 ## Description
 
-Buildkite Agent is a small Go binary used to run jobs from [Buildkite](https://buildkite.com). A single physical or virtual host can run multiple, independently configured Buildkite Agent services.
+[`buildkite-agent`](https://buildkite.com/docs/agent/v3) is a small Go binary that runs [Buildkite](https://buildkite.com) jobs.
 
-This module is designed for use with Hiera. Settings for Buildkite Agent services can be defined as Hiera hashes, providing a data-driven mechanism for managing complex configurations of multiple Buildkite Agents.
+The `buildkite_agent` module
 
-This module currently supports only macOS.
+- Installs `buildkite-agent` from GitHub release tarball
+- Manages Buildkite Agent [config files and settings](https://buildkite.com/docs/agent/v3/configuration)
+- Manages Buildkite Agent [launchd](https://www.launchd.info/) user agents
+
+
+This module currently supports macOS only. :apple:
 
 ## Setup
 
 ### What buildkite_agent affects
 
 - Download and installation `buildkite-agent` binary from GitHub release tarball
-- Management of one or more Buildkite Agent configuration files
-- Management of one or more Buildkite Agent `launchd` jobs
+- Management of multiple Buildkite Agent config files and [`launchd`](https://www.launchd.info/) user agents
+- Management of multiple Buildkite Agent `launchd` jobs
 
 ### Setup Requirements
 
