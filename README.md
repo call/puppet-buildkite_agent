@@ -1,6 +1,8 @@
 # buildkite_agent
 
-A Puppet module to manage [Buildkite Agent](https://buildkite.com/docs/agent/v3) on macOS. :apple:
+![](https://github.com/call/puppet-buildkite_agent/workflows/.github/workflows/macos_puppet_apply.yml/badge.svg)
+
+A Puppet module to manage [Buildkite Agent](https://buildkite.com/docs/agent/v3) on macOS.
 
 ## Table of Contents
 
