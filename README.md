@@ -83,7 +83,7 @@ Two [GitHub Actions](https://help.github.com/en/actions) workflows are used in t
     - `FORGE_API_KEY` must be set as a GitHub Actions [encrypted secret](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
 - `macos_pupet_apply.yml`
   - Triggered on every push
-  - Install `puppet-agent-6` from package at downloads.puppet.com/mac/puppet6/10.14/x86_64/
+  - Install `puppet-agent-6` from package at [downloads.puppet.com/mac/puppet6/10.14/x86_64/](https://downloads.puppet.com/mac/puppet6/10.14/x86_64/)
   - Build the module package from source with `tar`
   - Install the module with `sudo puppet module install`
   - Run `puppet apply -e` (2x) to [execute inline code](https://www.puppetcookbook.com/posts/simple-adhoc-execution-with-apply-execute.html) declaring the `buildkite_agent` class
