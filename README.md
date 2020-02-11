@@ -19,7 +19,7 @@ A Puppet module to manage [Buildkite Agent](https://buildkite.com/docs/agent/v3)
 
 Buildkite Agent (`buildkite-agent`) is a small Go binary that runs [Buildkite](https://buildkite.com) jobs.
 
-The `buildkite_agent` Puppet module
+The `buildkite_agent` Puppet module:
 
 - Installs `buildkite-agent` from GitHub [release](https://github.com/buildkite/agent/releases) tarball
 - Manages Buildkite Agent [config files and settings](https://buildkite.com/docs/agent/v3/configuration)
@@ -61,11 +61,11 @@ TODO: Figure out how to safely accept public contributions with GitHub Actions +
 
 ## Testing
 
-This module is tested by
+This module is tested using the following steps:
 
-- Installing `puppet-agent` and this module in a GitHub Actions macOS environment
-- Running `puppet apply` (2x) to check that desired state is configured and maintained
-- Validating configuration with [Serverspec](https://serverspec.org/) tests (located in the `test/` directory)
+- Install `puppet-agent` and this module in a GitHub Actions macOS environment
+- Run `puppet apply` (2x) to check that desired state is configured and maintained
+- Validate configuration with [Serverspec](https://serverspec.org/) tests (located in the `test/` directory)
 
 GitHub Actions macOS virtual environments are hosted on [MacStadium](https://help.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners#cloud-hosts-for-github-hosted-runners) and contain some [preconfigured software](https://help.github.com/en/actions/reference/software-installed-on-github-hosted-runners#macos-1015).
 
