@@ -94,7 +94,7 @@ Two [GitHub Actions](https://help.github.com/en/actions) workflows are used in t
   - Run `pdk build` to [build the module package](https://puppet.com/docs/pdk/1.x/pdk_building_module_packages.html)
   - Publish module package to the [Puppet Forge](https://forge.puppet.com/) using the [Forge API](https://puppet.com/blog/new-forge-api-endpoints-automating-module-management/)
     - `FORGE_API_KEY` must be set as a GitHub Actions [encrypted secret](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
-- `macos_puppet_apply.yml`
+- `macos_qa.yml`
   - Triggered on every push
   - Install `puppet-agent-6` from package at [downloads.puppet.com/mac/puppet6/10.14/x86_64/](https://downloads.puppet.com/mac/puppet6/10.14/x86_64/)
   - Build the module package from source with `tar`
