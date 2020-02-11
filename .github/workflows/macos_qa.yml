@@ -1,4 +1,4 @@
-name: MacOS puppet apply
+name: MacOS QA
 on: [push]
 jobs:
   pdk:
