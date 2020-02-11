@@ -45,9 +45,9 @@ Replace the value for `token` with your Buildkite [Agent Token](https://buildkit
 
 ## Usage
 
-:bulb:  If `buildkite_agent::config::user` or `buildkite_agent::service::user` are unspecified, the value returned by the custom fact `lib/facter/primary_user.rb` will be used as the default.
+To run a single Buildkite Agent with the default LaunchAgent label of `com.buildkite.buildkite-agent-primary`, use the example above (with your own token).
 
-To run a single Buildkite Agent with the default LaunchAgent label of `com.buildkite.buildkite-agent-primary`, use the _Beginning with buildkite_agent_ example above.
+:bulb:  If `buildkite_agent::config::user` or `buildkite_agent::service::user` are unspecified, the user with greatest login time, as determined by the custom fact `lib/facter/primary_user.rb`, will be used as the default.
 
 TODO: Add advanced usage examples
 
@@ -57,7 +57,7 @@ This module only supports macOS, and has only been tested on macOS Catalina (10.
 
 ## Development
 
-TODO: Figure out how to safely contribute with GitHub Actions + PRs
+TODO: Figure out how to safely accept public contributions with GitHub Actions + PRs
 
 ## Testing
 
@@ -65,11 +65,9 @@ This module is tested by
 
 - Installing `puppet-agent` and this module in a GitHub Actions macOS environment
 - Running `puppet apply` (2x) to check that desired state is configured and maintained
-- Validating configuration with [Serverspec](https://serverspec.org/) tests
+- Validating configuration with [Serverspec](https://serverspec.org/) tests (located in the `test/` directory)
 
 GitHub Actions macOS virtual environments are hosted on [MacStadium](https://help.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners#cloud-hosts-for-github-hosted-runners) and contain some [preconfigured software](https://help.github.com/en/actions/reference/software-installed-on-github-hosted-runners#macos-1015).
-
-All Serverspec tests are located in the `test/` directory.
 
 TODO: Add Puppet spec tests
 
