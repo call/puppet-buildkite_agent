@@ -6,11 +6,11 @@ A Puppet module to manage [Buildkite Agent](https://buildkite.com/docs/agent/v3)
 
 ## Table of Contents
 
-- [buildkite_agent](#buildkiteagent)
+- [buildkite_agent](#buildkite_agent)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Setup](#setup)
-    - [Beginning with buildkite_agent](#beginning-with-buildkiteagent)
+    - [Beginning with buildkite_agent](#beginning-with-buildkite_agent)
   - [Usage](#usage)
   - [Limitations](#limitations)
   - [Development](#development)
