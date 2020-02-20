@@ -8,6 +8,10 @@
     {
       "name": "puppetlabs/stdlib",
       "version_requirement": ">= 6.2.0 < 7.0.0"
+    },
+    {
+      "name": "call/facts",
+      "version_requirement": ">= 0.1.0 < 2.0.0"
     }
   ],
   "issues_url": "https://github.com/call/puppet-buildkite_agent/issues",
@@ -33,5 +37,5 @@
   "summary": "A Puppet module to manage Buildkite Agent on macOS.",
   "template-ref": "tags/1.15.0-0-g0bc522e",
   "template-url": "pdk-default#1.15.0",
-  "version": "0.2.1"
+  "version": "0.2.2"
 }
